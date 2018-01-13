@@ -23,6 +23,10 @@
 
 .controls .control {
   cursor: pointer;
+  font-weight: normal;
+}
+
+.controls .control.selected {
   font-weight: bold;
 }
 

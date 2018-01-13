@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
+import User from './User.js';
+
 import firebase from 'firebase';
 import 'firebase/database';
 
@@ -31,6 +33,8 @@ class App extends Component {
         const fbUsers = snapshot.val();
         var users = [];
 
+        // Almost definitely a better way to do this...
+        // Though it would be better if I had users as an array in firebase instead of a dictionary
         for (const userId in fbUsers) {
           users.push({
             userId: userId,
@@ -38,6 +42,8 @@ class App extends Component {
             id: fbUsers[userId].id
           });
         }
+
+        // create the new state object and send it on its way
         const data = {
           users: users,
           loaded: true
@@ -53,6 +59,7 @@ class App extends Component {
       .slice()
       .sort((a, b) => a[this.state.sortOrderKey] > b[this.state.sortOrderKey]);
 
+    // now render this
     return (
       <div className="App">
         {!this.state.loaded ? (
@@ -61,19 +68,31 @@ class App extends Component {
           <div>
             <div className="controls">
               <div
-                className="control"
+                className={
+                  this.state.sortOrderKey === 'name'
+                    ? 'control selected'
+                    : 'control'
+                }
                 onClick={() => this.setState({ sortOrderKey: 'name' })}
               >
                 Sort by Name
               </div>
               <div
-                className="control"
+                className={
+                  this.state.sortOrderKey === 'id'
+                    ? 'control selected'
+                    : 'control'
+                }
                 onClick={() => this.setState({ sortOrderKey: 'id' })}
               >
                 Sort by Id
               </div>
             </div>
-            <div>{sortedUsers.map(user => <div>User: {user.name}</div>)}</div>
+            <div className="users">
+              {sortedUsers.map((user, index) => (
+                <User userData={user} key={index} />
+              ))}
+            </div>
           </div>
         )}
       </div>
