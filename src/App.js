@@ -53,11 +53,17 @@ class App extends Component {
       });
   }
 
-  render() {
-    // Let's get the sorted users, assuming that the sortOrder is actually a key
+  sortUsers() {
     const sortedUsers = this.state.users
       .slice()
       .sort((a, b) => a[this.state.sortOrderKey] > b[this.state.sortOrderKey]);
+
+    return sortedUsers;
+  }
+
+  render() {
+    // Let's get the sorted users, assuming that the sortOrder is actually a key
+    const sortedUsers = this.sortUsers();
 
     // now render this
     return (
