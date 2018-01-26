@@ -23,5 +23,6 @@
     "valid-typeof": "warn",
     "quotes": ["error", "single"]
   },
+  "extends": ["eslint:recommended", "plugin:react/recommended"],
   "plugins": ["react"]
 }
