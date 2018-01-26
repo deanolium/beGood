@@ -67,6 +67,7 @@ class App extends Component {
     // now render this
     return (
       <div className="App">
+        Boop!  
         {!this.state.loaded ? (
           <div className="loading">Loading</div>
         ) : (
