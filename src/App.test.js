@@ -44,7 +44,7 @@ describe('main app', () => {
     expect(testApp.sortUsers()).toEqual(expectedUsers);
   });
 
-  it('intentionally working', () => {
-    expect(1).toEqual(2 - 1);
+  it('intentionally breaking', () => {
+    expect(1).toEqual(2);
   });
 });
