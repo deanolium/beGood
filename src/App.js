@@ -22,35 +22,34 @@ class App extends Component {
       sortOrderKey: 'name',
       loaded: false
     };
+
+    this.database = firebase.database();
   }
 
   componentDidMount() {
     // Connect to firebase and grab the list of users
-    firebase
-      .database()
-      .ref('users')
-      .on('value', snapshot => {
-        const fbUsers = snapshot.val();
-        var users = [];
+    this.database.ref('users').on('value', snapshot => {
+      const fbUsers = snapshot.val();
+      var users = [];
 
-        // Almost definitely a better way to do this...
-        // Though it would be better if I had users as an array in firebase instead of a dictionary
-        for (const userId in fbUsers) {
-          users.push({
-            userId: userId,
-            name: fbUsers[userId].name,
-            id: fbUsers[userId].id
-          });
-        }
+      // Almost definitely a better way to do this...
+      // Though it would be better if I had users as an array in firebase instead of a dictionary
+      for (const userId in fbUsers) {
+        users.push({
+          userId: userId,
+          name: fbUsers[userId].name,
+          id: fbUsers[userId].id
+        });
+      }
 
-        // create the new state object and send it on its way
-        const data = {
-          users: users,
-          loaded: true
-        };
+      // create the new state object and send it on its way
+      const data = {
+        users: users,
+        loaded: true
+      };
 
-        return this.setState(data);
-      });
+      return this.setState(data);
+    });
   }
 
   sortUsers() {
