@@ -3,11 +3,13 @@
     "browser": true,
     "commonjs": true,
     "es6": true,
-    "node": true
+    "node": true,
+    "jest": true
   },
   "parserOptions": {
     "ecmaFeatures": {
-      "jsx": true
+      "jsx": true,
+      "modules": true
     },
     "sourceType": "module"
   },
@@ -20,5 +22,6 @@
     "constructor-super": "warn",
     "valid-typeof": "warn",
     "quotes": ["error", "single"]
-  }
+  },
+  "plugins": ["react"]
 }
